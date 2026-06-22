@@ -18,23 +18,23 @@ describe("Automation Exercise - Core Assignment Workflows", () => {
   });
 
   it("Test Case 2: Register a New User", () => {
-    const email = `student${Date.now()}@test.com`;
+    const email = `lavigne${Date.now()}@test.com`;
 
     cy.contains("Signup / Login").click();
     cy.get(".signup-form").should("be.visible");
 
-    cy.get('[data-qa="signup-name"]').type("Test Automation User");
+    cy.get('[data-qa="signup-name"]').type("Lavigne Nancy");
     cy.get('[data-qa="signup-email"]').type(email);
     cy.get('[data-qa="signup-button"]').click();
 
-    cy.get("#id_gender1").check();
-    cy.get('[data-qa="password"]').type("SecurePass123!");
+    cy.get("#id_gender2").check(); 
+    cy.get('[data-qa="password"]').type("lavigne@2007");
     cy.get('[data-qa="days"]').select("15");
     cy.get('[data-qa="months"]').select("January");
-    cy.get('[data-qa="years"]').select("2000");
+    cy.get('[data-qa="years"]').select("2007");
 
-    cy.get('[data-qa="first_name"]').type("John");
-    cy.get('[data-qa="last_name"]').type("Doe");
+    cy.get('[data-qa="first_name"]').type("Lavigne");
+    cy.get('[data-qa="last_name"]').type("Nancy");
     cy.get('[data-qa="address"]').type("123 Test Automation Way");
     cy.get('[data-qa="country"]').select("United States");
     cy.get('[data-qa="state"]').type("California");
@@ -47,7 +47,7 @@ describe("Automation Exercise - Core Assignment Workflows", () => {
     cy.get('[data-qa="continue-button"]').click();
     cy.get(".navbar-nav").should(
       "contain.text",
-      "Logged in as Test Automation User"
+      "Logged in as Lavigne Nancy"
     );
 
     cy.get('a[href="/delete_account"]').click();
@@ -56,16 +56,16 @@ describe("Automation Exercise - Core Assignment Workflows", () => {
   });
 
   it("Test Case 3: Login With Valid Credentials", () => {
-    const email = `login_test_${Date.now()}@test.com`;
+    const email = `login_lavigne_${Date.now()}@test.com`;
 
     cy.contains("Signup / Login").click();
-    cy.get('[data-qa="signup-name"]').type("Valid Login User");
+    cy.get('[data-qa="signup-name"]').type("Lavigne Nancy");
     cy.get('[data-qa="signup-email"]').type(email);
     cy.get('[data-qa="signup-button"]').click();
-    cy.get("#id_gender1").check();
-    cy.get('[data-qa="password"]').type("SecurePass123!");
-    cy.get('[data-qa="first_name"]').type("John");
-    cy.get('[data-qa="last_name"]').type("Doe");
+    cy.get("#id_gender2").check();
+    cy.get('[data-qa="password"]').type("lavigne@2007");
+    cy.get('[data-qa="first_name"]').type("Lavigne");
+    cy.get('[data-qa="last_name"]').type("Nancy");
     cy.get('[data-qa="address"]').type("123 Test St");
     cy.get('[data-qa="country"]').select("United States");
     cy.get('[data-qa="state"]').type("California");
@@ -76,10 +76,10 @@ describe("Automation Exercise - Core Assignment Workflows", () => {
     cy.get('[data-qa="continue-button"]').click();
     cy.get('a[href="/logout"]').click();
 
-    cy.login(email, "SecurePass123!");
+    cy.login(email, "lavigne@2007");
     cy.get(".navbar-nav").should(
       "contain.text",
-      "Logged in as Valid Login User"
+      "Logged in as Lavigne Nancy"
     );
 
     cy.get('a[href="/logout"]').click();
@@ -99,10 +99,10 @@ describe("Automation Exercise - Core Assignment Workflows", () => {
 
   it("Test Case 5: Search for a Product", () => {
     cy.get('a[href="/products"]').click();
-    cy.get("#search_product").type("Dress");
+    cy.get("#search_product").type("Top");
     cy.get("#submit_search").click();
     cy.get(".title").should("contain.text", "Searched Products");
-    cy.get(".features_items").should("contain.text", "Dress");
+    cy.get(".features_items").should("contain.text", "Top");
   });
 
   it("Test Case 6: View Product Details", () => {
@@ -153,8 +153,8 @@ describe("Automation Exercise - Core Assignment Workflows", () => {
     cy.get('a[href="/contact_us"]').click();
     cy.get(".contact-form").should("be.visible");
 
-    cy.get('[data-qa="name"]').type("QA Tester");
-    cy.get('[data-qa="email"]').type("tester@example.com");
+    cy.get('[data-qa="name"]').type("Lavigne Nancy");
+    cy.get('[data-qa="email"]').type("lavigne@test.com");
     cy.get('[data-qa="subject"]').type("Automation Query");
     cy.get('[data-qa="message"]').type("Automating this form using Cypress.");
 
@@ -188,9 +188,9 @@ describe("Automation Exercise - Core Assignment Workflows", () => {
   it("Challenge Task 4: Test Category Navigation", () => {
     cy.get(".left-sidebar").should("be.visible");
     cy.get(".panel-title a").contains("Women").click();
-    cy.get("#Women a").contains("Dress").click();
+    cy.get("#Women a").contains("Tops").click();
     
-    cy.url().should("include", "/category_products/1");
-    cy.get(".title").should("contain.text", "Women - Dress Products");
+    cy.url().should("include", "/category_products/2");
+    cy.get(".title").should("contain.text", "Women - Tops Products");
   });
 });
